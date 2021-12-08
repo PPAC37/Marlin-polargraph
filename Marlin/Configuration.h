@@ -764,7 +764,7 @@
 // Enable for Polargraph Kinematics
 #define POLARGRAPH
 #if ENABLED(POLARGRAPH)
-  #define POLARGRAPH_MAX_BELT_LEN 1035.0
+  #define POLARGRAPH_MAX_BELT_LEN 2035.0
   #define POLAR_SEGMENTS_PER_SECOND 5
 
   #define X_MIN_PIN       35  // AUX4_10_PIN
@@ -1019,7 +1019,7 @@
  *
  * See https://github.com/synthetos/TinyG/wiki/Jerk-Controlled-Motion-Explained
  */
-//#define S_CURVE_ACCELERATION
+#define S_CURVE_ACCELERATION
 
 //===========================================================================
 //============================= Z Probe Options =============================
@@ -1374,15 +1374,19 @@
 // @section machine
 
 // The size of the printable area
-#define X_BED_SIZE 650
-#define Y_BED_SIZE 1000
+// DR 2021-12-05: The techincally correct width is 650+715.
+// X_BED_SIZE and Y_BED_SIZE are expected to be whole numbers.  A whole number divided in two rounds down.
+// Once rounded down it fails one of the sanity checks.
+// Therefore I made it 716 so it rounds to an even number.
+#define X_BED_SIZE (650+716)  
+#define Y_BED_SIZE 2000
 
 // Travel limits (mm) after homing, corresponding to endstop positions.
-#define X_MIN_POS -325
-#define Y_MIN_POS -500
+#define X_MIN_POS -(X_BED_SIZE/2)
+#define Y_MIN_POS -(Y_BED_SIZE/2)
 #define Z_MIN_POS 0
-#define X_MAX_POS 325
-#define Y_MAX_POS 500
+#define X_MAX_POS (X_BED_SIZE/2)
+#define Y_MAX_POS (Y_BED_SIZE/2)
 #define Z_MAX_POS 200
 //#define I_MIN_POS 0
 //#define I_MAX_POS 50
@@ -1729,7 +1733,7 @@
 // Manually set the home position. Leave these undefined for automatic settings.
 // For DELTA this is the top-center of the Cartesian print volume.
 #define MANUAL_X_HOME_POS 0
-#define MANUAL_Y_HOME_POS -482.65 //(Y_MAX_POS-( sqrt(sq(POLARGRAPH_MAX_BELT_LEN)-sq(X_BED_SIZE/2))))
+#define MANUAL_Y_HOME_POS -917.14 //(Y_MAX_POS-( sqrt(sq(POLARGRAPH_MAX_BELT_LEN)-sq(X_BED_SIZE/2))))
 //#define MANUAL_Z_HOME_POS 0
 //#define MANUAL_I_HOME_POS 0
 //#define MANUAL_J_HOME_POS 0
@@ -1827,7 +1831,7 @@
  *   M501 - Read settings from EEPROM. (i.e., Throw away unsaved changes)
  *   M502 - Revert settings to "factory" defaults. (Follow with M500 to init the EEPROM.)
  */
-//#define EEPROM_SETTINGS     // Persistent storage with M500 and M501
+#define EEPROM_SETTINGS     // Persistent storage with M500 and M501
 //#define DISABLE_M503        // Saves ~2700 bytes of PROGMEM. Disable for release!
 #define EEPROM_CHITCHAT       // Give feedback on EEPROM commands. Disable to save PROGMEM.
 #define EEPROM_BOOT_SILENT    // Keep M503 quiet and only give errors during first load
