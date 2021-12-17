@@ -3742,7 +3742,7 @@
   //#define MAIN_MENU_ITEM_1_CONFIRM          // Show a confirmation dialog before this action
 
   #define MAIN_MENU_ITEM_2_DESC "Pen Down " 
-  #define MAIN_MENU_ITEM_2_GCODE "M28 P0 S30 T50" 
+  #define MAIN_MENU_ITEM_2_GCODE "M280 P0 S30 T50" 
   //#define MAIN_MENU_ITEM_2_CONFIRM
 
   //#define MAIN_MENU_ITEM_3_DESC "Preheat for " PREHEAT_2_LABEL
